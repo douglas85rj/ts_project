@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@adminjs/express": "^6.0.0",
+    "@adminjs/sequelize": "^4.0.0",
+    "adminjs": "^7.2.1"
+  }
+}
