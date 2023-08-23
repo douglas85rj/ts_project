@@ -38,7 +38,11 @@ export const ProductInit = (sequelize) => {
        
     }, {
         sequelize,
-        tableName: 'product'
+        tableName: 'products',       
+        createdAt: 'createdAt',
+        updatedAt: 'updatedAt',
+        modelName: 'product'
+
     });
 };
 

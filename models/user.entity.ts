@@ -7,6 +7,7 @@ interface IUser{
     email: string;
     username: string;
     password: string;
+    role: string;
     createdAt?: Date;
     updatedAt?: Date;
 }
@@ -48,6 +49,11 @@ User.init(
             type: new DataTypes.STRING(256),
             allowNull: false
         },
+        role: {
+            type: new DataTypes.STRING(20),
+            allowNull: false,
+            defaultValue: 'user'
+        },
         createdAt: {
             type: new DataTypes.DATE,
             allowNull: false,
@@ -63,5 +69,6 @@ User.init(
         sequelize,
         tableName: 'users',
         modelName: 'user',
+        
     }
 )
