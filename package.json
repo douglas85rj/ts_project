@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "@tiptap/pm": "^2.1.6",
+    "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.17.17",
     "@types/express-session": "^1.17.7",
