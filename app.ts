@@ -63,7 +63,7 @@ const start = async () => {
     },
     branding: {
       favicon: "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
-      logo: "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
+      logo: "https://a.imagem.app/bPSwOQ.png",
       companyName: "Controle de estoque - CAEFE"
     }
   })
