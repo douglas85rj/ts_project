@@ -62,8 +62,8 @@ const start = async () => {
       component: AdminJS.bundle('./components/dashboard.tsx')
     },
     branding: {
-      favicon: "https://t4.ftcdn.net/jpg/05/06/81/59/360_F_506815935_cvsf1tKw8WuPeHpHSm2efPbbH08Tw8nN.png",
-      logo: "https://t4.ftcdn.net/jpg/05/06/81/59/360_F_506815935_cvsf1tKw8WuPeHpHSm2efPbbH08Tw8nN.png",
+      favicon: "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
+      logo: "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
       companyName: "Controle de estoque - CAEFE"
     }
   })
