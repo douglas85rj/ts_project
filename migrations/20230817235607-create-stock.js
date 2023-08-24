@@ -38,9 +38,10 @@ module.exports = {
             allowNull: false,
         },
     });
-    Stock.belongsTo(Product, { foreignKey: 'productId' });
+    
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('stock');
   }
 };
+Stock.belongsTo(Product, { foreignKey: 'productId' });
