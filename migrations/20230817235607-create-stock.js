@@ -13,16 +13,20 @@ module.exports = {
             type: Sequelize.INTEGER,
             allowNull: false,
             references: {
-                model: 'Product',
+                model: 'Produtos',
                 key: 'id'
             }
             
             },
-        quantity: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
+         quantity: {
+             type: Sequelize.INTEGER,
+           allowNull: false,
+           references: {  
+                model: 'Produtos',
+                key: 'quantity'
+            }
           
-      },
+       },
     
         createdAt: {
             type: Sequelize.DATE,
@@ -34,6 +38,7 @@ module.exports = {
             allowNull: false,
         },
     });
+    Stock.belongsTo(Product, { foreignKey: 'productId' });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('stock');
