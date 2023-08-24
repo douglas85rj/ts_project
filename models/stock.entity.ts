@@ -1,5 +1,6 @@
 import {DataTypes, Model, Optional} from 'sequelize';
 import { sequelize } from "../db";
+import { Product } from './product.entity';
 
 interface IStock {
     id: number;
@@ -59,6 +60,7 @@ Stock.init({
 });
 
 
+Stock.belongsTo(Product, { foreignKey: 'productId' });
 
 
 
