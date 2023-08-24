@@ -3,7 +3,7 @@ import AdminJSExpress from '@adminjs/express'
 import express from 'express'
 import { sequelize } from './db';
 import * as AdminJSSequelize from '@adminjs/sequelize'
-import { User, Stock, Product } from './models';
+import { User, Stock, Product, Category } from './models';
 
 
 AdminJS.registerAdapter({
@@ -25,7 +25,7 @@ const start = async () => {
   const admin = new AdminJS({
 
     resources: [
-     User, Stock, Product
+     User, Stock, Product, Category
     ],
     rootPath: '/admin',
 

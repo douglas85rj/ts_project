@@ -22,13 +22,13 @@ export class Stock extends Model<IStock, StockCreationAttributes> implements ISt
 
 Stock.init({
     id: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
 
     productId: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
             model: 'Product',
@@ -37,7 +37,7 @@ Stock.init({
         
         },
     quantity: {
-        type: DataTypes.INTEGER.UNSIGNED,
+        type: DataTypes.INTEGER,
         allowNull: false,
       
   },
