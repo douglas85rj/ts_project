@@ -1,6 +1,6 @@
 import {Model, Optional, DataTypes} from 'sequelize';
 import { sequelize } from "../db";
-import { type } from 'os';
+
 
 interface IProduct {
     id: number;
@@ -56,7 +56,7 @@ Product.init({
 
 }, {
 
-    tableName: 'products',
-    modelName: 'Produtos',
+    tableName: 'Produtos',
+    modelName: 'product',
     sequelize,
 });

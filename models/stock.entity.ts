@@ -29,6 +29,10 @@ Stock.init({
     productId: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
+        references: {
+            model: 'Product',
+            key: 'id'
+        }
         
         },
     quantity: {
