@@ -1,68 +1,59 @@
 import {DataTypes, Model, Optional} from 'sequelize';
 import { sequelize } from "../db";
 
-interface StockAttributes {
+interface IStock {
     id: number;
-    name: string;
-    description: string;
-    category: string;
+    productId: number;
     quantity: number;
-    product_id: number;
-    status: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
-
+    createdAt: Date;
+    updatedAt: Date;
 }
 
-interface StockCreationAttributes extends Optional<StockAttributes, 'id'> {}
+export type StockCreationAttributes = Optional<IStock, 'id'>;
 
-export class Stock extends Model<StockAttributes, StockCreationAttributes> implements StockAttributes {
-    category: string;
-
-    id!: number;
-    name!: string;
-    description: string;
-    quantity!: number;
-    product_id!: number;
-    status!: boolean;
-
-
+export class Stock extends Model<IStock, StockCreationAttributes> implements IStock {
+    public id!: number;
+    public productId!: number;
+    public quantity!: number;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
 
 Stock.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
     },
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    category: DataTypes.STRING,
-    quantity: DataTypes.INTEGER,
-    product_id: {
-        type: DataTypes.INTEGER,
-        references: {
-            model: 'product',
-            key: 'id'
-        },
-        allowNull: false
-    },
-    status: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true
-    }
-},
-    
-    {
-        sequelize,
-    tableName: 'stocks',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    modelName: 'stock'
 
+    productId: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        
+        },
+    quantity: {
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+      
+  },
+
+    createdAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+
+    updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+
+}, {
+
+    tableName: 'Estoque',
+    modelName: 'stock',
+    sequelize: sequelize, // this bit is important
 });
+
 
 
 
