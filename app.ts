@@ -16,72 +16,21 @@ const PORT = 3000
 
 const start = async () => {
   const app = express()
+  sequelize.sync().then((result) => {
+    console.log(result);
+  }).catch((err) => {
+    console.log(err);
+  });
+
 
   const admin = new AdminJS({
 
     resources: [
-      {
-        resource: sequelize.models.User,
-        options: {
-          properties: {
-            encryptedPassword: {
-              isVisible: false,
-            },
-            password: {
-              type: 'string',
-              isVisible: {
-                list: false, edit: true, filter: false, show: false,
-              },
-            },
-          },
-        },
-      },
-      {
-        resource: sequelize.models.Stock,
-        options: {
-          properties: {
-            id: {
-              isVisible: false,
-            },
-            createdAt: {
-              isVisible: false,
-            },            
-            quantity: {
-              isVisible: {
-              list: true, edit: true, filter: false, show: true,
-            },
-            updatedAt: {
-              isVisible: false,
-            },
-          },
-        },
-      },
-      {
-        resource: sequelize.models.Product,
-        options: {
-          properties: {
-            id: {
-              isVisible: false,
-            },
-            createdAt: {
-              isVisible: true,
-            },
-            quantity: {
-              isVisible: true,
-            },
-            updatedAt: {
-              isVisible: true,
-            },
-          },
-        },
-      },
+     User, Stock, Product
     ],
     rootPath: '/admin',
 
-
-
-
-  })
+  })  
 
   const adminRouter = AdminJSExpress.buildRouter(admin)
   app.use(admin.options.rootPath, adminRouter)
