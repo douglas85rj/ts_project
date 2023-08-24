@@ -13,6 +13,14 @@ module.exports = {
             type: Sequelize.STRING(128),
             allowNull: false,
         },
+        categoryId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Categorias',
+                key: 'id'
+            }
+        },
     
         description: {
             type: Sequelize.STRING(128),
