@@ -5,7 +5,7 @@ import { Product } from './product.entity';
 interface IStock {
     id: number;
     productId: number;
-     quantity: number;
+    quantity: number;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -15,9 +15,9 @@ export type StockCreationAttributes = Optional<IStock, 'id'>;
 export class Stock extends Model<IStock, StockCreationAttributes> implements IStock {
     public id!: number;
     public productId!: number;
-     public quantity!: number;
-    public readonly createdAt!: Date;
-    public readonly updatedAt!: Date;
+    public quantity!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
 }
 
 Stock.init({
@@ -41,9 +41,8 @@ Stock.init({
         allowNull: true,
         references: {
             model: 'Produtos',
-            key: 'quantity'
-        }
-        
+            key: 'id'
+        }       
       
    },
 
