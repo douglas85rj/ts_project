@@ -1,5 +1,5 @@
 const Dashboard = () => {
-    return 'oi'
+    return 'Bem vindo'
 }
 
 export default Dashboard;

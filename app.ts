@@ -114,9 +114,7 @@ const start = async () => {
 
 
 
-  app.listen(PORT, () => {
-    console.log(`AdminJS started on http://localhost:${PORT}${admin.options.rootPath}`)
-  })
+
 }
 
 start()
