@@ -1,30 +1,27 @@
 import {Model, Optional, DataTypes} from 'sequelize';
 import { sequelize } from "../db";
 
-
-interface IProduct {
+interface ICategory {
     id: number;
     name: string;
     description: string;
-    quantity: number;
     status: boolean;
     createdAt: Date;
     updatedAt: Date;
 }
 
-export type ProductCreationAttributes = Optional<IProduct, 'id'>;
+export type CategoryCreationAttributes = Optional<ICategory, 'id'>;
 
-export class Product extends Model<IProduct, ProductCreationAttributes> implements IProduct {
+export class Category extends Model<ICategory, CategoryCreationAttributes> implements ICategory {
     public id!: number;
     public name!: string;
     public description!: string;
-    public quantity!: number;
     public status!: boolean;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
 
-Product.init({
+Category.init({
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         autoIncrement: true,
@@ -41,16 +38,10 @@ Product.init({
         allowNull: false,
     },
 
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-    },
-
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: false    
+        defaultValue: false
     },
 
     createdAt: {
@@ -61,11 +52,9 @@ Product.init({
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-    },
-
+    }
 }, {
-
-    tableName: 'Produtos',
-    modelName: 'product',
-    sequelize,
+    tableName: 'Categorias',
+    modelName: 'Category',
+    sequelize: sequelize
 });
