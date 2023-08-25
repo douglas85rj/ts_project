@@ -44,4 +44,3 @@ module.exports = {
     await queryInterface.dropTable('stock');
   }
 };
-Stock.belongsTo(Product, { foreignKey: 'productId' });

@@ -78,7 +78,7 @@ Product.init({
 }, {
 
     tableName: 'Produtos',
-    modelName: 'product',
+    modelName: 'Product',
     sequelize,
 });
 

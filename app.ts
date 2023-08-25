@@ -8,6 +8,7 @@ import { User, Stock, Product, Category } from './models';
 import { generateResource } from './utils/modeling-model';
 import { encryptPassword } from './utils/user-utils';
 
+
 const mysqlStore = require('express-mysql-session')(session);
 require('dotenv').config();
 
@@ -77,7 +78,7 @@ const start = async () => {
     port: process.env.DB_PORT,
     createDatabaseTable: true
   })
-  const secret = 'tsiVAtrIm9w6brtVZ7LhheemelWsTWU2';
+  const secret = process.env.SECRET;
   const cookieName = 'adminjs';
   const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
     admin,
@@ -91,14 +92,14 @@ const start = async () => {
         return false;
       },
       cookieName: cookieName,
-      cookiePassword: secret
+      cookiePassword: 'secret',      
     },
     null,
     {
       store: sessionStore,
       resave: true,
       saveUninitialized: true,
-      secret: secret,
+      secret: 'secret',
       cookie: {
         httpOnly: process.env.NODE_ENV === 'production',
         secure: process.env.NODE_ENV === 'production'

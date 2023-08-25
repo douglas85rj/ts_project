@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
-    "password": "C@liforni@2023",
+    "username": "estoque_caefe",
+    "password": "C@efe2023",
     "database": "estoque_caefe",
-    "host": "127.0.0.1",
+    "host": "estoque_caefe.mysql.dbaas.com.br",
     "dialect": "mysql"
   },
   "test": {
