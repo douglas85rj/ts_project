@@ -25,6 +25,26 @@ module.exports = {
                 model: 'Produtos',
                 key: 'id'
             }
+        },
+
+            withdrawal: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'Produtos',
+                    key: 'quantity'
+
+                }
+
+              },
+              deposit: {
+                type: Sequelize.INTEGER,
+                allowNull: false,
+                references: {
+                    model: 'Produtos',
+                    key: 'quantity'
+                }
+
           
        },
     

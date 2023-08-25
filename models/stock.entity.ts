@@ -6,8 +6,12 @@ interface IStock {
     id: number;
     productId: number;
     quantity: number;
+    withdrawal: number;
+    deposit: number;
     createdAt: Date;
     updatedAt: Date;
+
+
 }
 
 export type StockCreationAttributes = Optional<IStock, 'id'>;
@@ -16,6 +20,8 @@ export class Stock extends Model<IStock, StockCreationAttributes> implements ISt
     public id!: number;
     public productId!: number;
     public quantity!: number;
+    public withdrawal!: number;
+    public deposit!: number;
     public createdAt!: Date;
     public updatedAt!: Date;
 }
@@ -41,7 +47,7 @@ Stock.init({
         allowNull: true,
         references: {
             model: 'Produtos',
-            key: 'id'
+            key: 'quantity'
         }       
       
    },
@@ -50,6 +56,24 @@ Stock.init({
         type: DataTypes.DATE,
         allowNull: false,
     },
+
+    withdrawal: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Produtos',
+            key: 'quantity'
+        }
+    },
+    deposit: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        references: {
+            model: 'Produtos',
+            key: 'quantity'
+        }
+    },
+
 
     updatedAt: {
         type: DataTypes.DATE,
@@ -65,6 +89,10 @@ Stock.init({
 
 
 Stock.belongsTo(Product, { foreignKey: 'productId' });
+Product.hasMany(Stock, { foreignKey: 'productId' });
+
+
+
 
 
 
