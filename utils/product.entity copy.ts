@@ -1,32 +1,28 @@
 import {Model, Optional, DataTypes} from 'sequelize';
 import { sequelize } from "../db";
-import { Category } from './category.entity';
-
-
+import { Category } from '../models/category.entity';
 
 
 interface IProduct {
     id: number;
     name: string;
-    description: string;
-    price: number;
-    quantity: number;
     categoryId: number;
+    description: string;
+    quantity: number;
     status: boolean;
     createdAt: Date;
     updatedAt: Date;
-
 }
 
 export type ProductCreationAttributes = Optional<IProduct, 'id'>;
 
 export class Product extends Model<IProduct, ProductCreationAttributes> implements IProduct {
+   
     public id!: number;
     public name!: string;
-    public description!: string;
-    public price!: number;
-    public quantity!: number;
     public categoryId!: number;
+    public description!: string;
+    public quantity!: number;
     public status!: boolean;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
@@ -43,31 +39,30 @@ Product.init({
         type: DataTypes.STRING(128),
         allowNull: false,
     },
+    categoryId: {
+        type:  DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'Categorias',
+            key: 'id'
+        }
+    },
 
     description: {
         type: DataTypes.STRING(128),
         allowNull: false,
     },
 
-    price: {
-        type: DataTypes.DECIMAL(10,2),
-        allowNull: false,
-    },
-
     quantity: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    },
-    
-    categoryId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        defaultValue: 0
     },
 
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-
+        defaultValue: false    
     },
 
     createdAt: {
@@ -78,14 +73,15 @@ Product.init({
     updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-    }
+    },
 
 }, {
+
     tableName: 'Produtos',
-    modelName: 'product',
-    sequelize: sequelize
+    modelName: 'Product',
+    sequelize,
 });
 
-Product.belongsTo(Category, {foreignKey: 'categoryId', as: 'category'});
-Category.hasMany(Product, {foreignKey: 'categoryId', as: 'products'});
+Product.belongsTo(Category, { foreignKey: 'categoryId' });
+Category.hasMany(Product, { foreignKey: 'categoryId' });
 

@@ -2,11 +2,20 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('stock', {
+    await queryInterface.createTable('withdrawal', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             primaryKey: true,
+        },
+    
+        userId: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Usuarios',
+                key: 'id'
+            }
         },
     
         productId: {
@@ -16,37 +25,18 @@ module.exports = {
                 model: 'Produtos',
                 key: 'id'
             }
-            
-            },
-         quantity: {
-             type: Sequelize.INTEGER,
-           allowNull: false,
-           references: {  
-                model: 'Produtos',
-                key: 'id'
-            }
+    
         },
-
-            withdrawal: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Produtos',
-                    key: 'quantity'
-
-                }
-
-              },
-              deposit: {
-                type: Sequelize.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'Produtos',
-                    key: 'quantity'
-                }
-
-          
-       },
+    
+        quantity: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Produtos',
+                key: 'quantity'
+            }
+    
+        },
     
         createdAt: {
             type: Sequelize.DATE,
@@ -57,10 +47,19 @@ module.exports = {
             type: Sequelize.DATE,
             allowNull: false,
         },
+    
+
+   
     });
     
+    
+    
   },
+
+  
+  
+  
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('stock');
+    await queryInterface.dropTable('withdrawal');
   }
 };

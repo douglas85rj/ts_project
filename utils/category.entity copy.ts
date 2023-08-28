@@ -1,38 +1,27 @@
 import {Model, Optional, DataTypes} from 'sequelize';
 import { sequelize } from "../db";
-import { Category } from './category.entity';
 
-
-
-
-interface IProduct {
+interface ICategory {
     id: number;
     name: string;
     description: string;
-    price: number;
-    quantity: number;
-    categoryId: number;
     status: boolean;
     createdAt: Date;
     updatedAt: Date;
-
 }
 
-export type ProductCreationAttributes = Optional<IProduct, 'id'>;
+export type CategoryCreationAttributes = Optional<ICategory, 'id'>;
 
-export class Product extends Model<IProduct, ProductCreationAttributes> implements IProduct {
+export class Category extends Model<ICategory, CategoryCreationAttributes> implements ICategory {
     public id!: number;
     public name!: string;
     public description!: string;
-    public price!: number;
-    public quantity!: number;
-    public categoryId!: number;
     public status!: boolean;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
 
-Product.init({
+Category.init({
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -49,25 +38,10 @@ Product.init({
         allowNull: false,
     },
 
-    price: {
-        type: DataTypes.DECIMAL(10,2),
-        allowNull: false,
-    },
-
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-    
-    categoryId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
-
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-
+        defaultValue: false
     },
 
     createdAt: {
@@ -79,13 +53,10 @@ Product.init({
         type: DataTypes.DATE,
         allowNull: false,
     }
-
 }, {
-    tableName: 'Produtos',
-    modelName: 'product',
+    tableName: 'Categorias',
+    modelName: 'Category',
     sequelize: sequelize
 });
 
-Product.belongsTo(Category, {foreignKey: 'categoryId', as: 'category'});
-Category.hasMany(Product, {foreignKey: 'categoryId', as: 'products'});
 

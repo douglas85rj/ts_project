@@ -1,73 +1,83 @@
-import AdminJS from 'adminjs'
-import AdminJSExpress from '@adminjs/express'
-import express from 'express'
-import session from 'express-session'
-import { sequelize } from './db';
-import * as AdminJSSequelize from '@adminjs/sequelize'
-import { User, Stock, Product, Category } from './models';
-import { generateResource } from './utils/modeling-model';
-import { encryptPassword } from './utils/user-utils';
+import AdminJS from "adminjs";
+import AdminJSExpress from "@adminjs/express";
+import express from "express";
+import session from "express-session";
+import { sequelize } from "./db";
+import * as AdminJSSequelize from "@adminjs/sequelize";
+import { User, StockMovement, Product, Category } from "./models";
+import { generateResource } from "./utils/modeling-model";
+import { encryptPassword } from "./utils/user-utils";
 
 
-const mysqlStore = require('express-mysql-session')(session);
-require('dotenv').config();
+
+const mysqlStore = require("express-mysql-session")(session);
+require("dotenv").config();
 
 AdminJS.registerAdapter({
   Resource: AdminJSSequelize.Resource,
   Database: AdminJSSequelize.Database,
 });
 
-const PORT = 3000
-
+const PORT = 3000;
 
 const start = async () => {
-  const app = express()
-  sequelize.sync().then((result) => {
-    console.log(result);
-  }).catch((err) => {
-    console.log(err);
-  });
+  const app = express();
+  sequelize
+    .sync()
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-  await sequelize.authenticate()
-  console.log('Connection has been established successfully.')
+  await sequelize.authenticate();
+  console.log("Connection has been established successfully.");
 
-  
   const admin = new AdminJS({
     resources: [
-      generateResource(User, {
-        password: {
-          type: 'password',
-          isVisible: {
-            add: true, list: false, edit: true, filter: false, show: false
-          }
+      generateResource(
+        User,
+        {
+          password: {
+            type: "password",
+            isVisible: {
+              add: true,
+              list: false,
+              edit: true,
+              filter: false,
+              show: false,
+            },
+          },
+        },
+        {
+          new: {
+            before: async (request: any) => {
+              return encryptPassword(request);
+            },
+          },
+          edit: {
+            before: async (request: any) => {
+              return encryptPassword(request);
+            },
+          },
         }
-      }, {
-        new: {
-          before: async (request: any) => {
-            return encryptPassword(request);
-          }
-        },
-        edit: {
-          before: async (request: any) => {
-            return encryptPassword(request);
-          }
-        },
-      }),
-      generateResource(Stock),
+      ),
+      generateResource(StockMovement),
       generateResource(Product),
       generateResource(Category),
-
     ],
-    rootPath: '/admin',
+    rootPath: "/admin",
     dashboard: {
-      component: AdminJS.bundle('./components/dashboard.tsx')
+      component: AdminJS.bundle("./components/dashboard.tsx"),
     },
     branding: {
-      favicon: "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
+      favicon:
+        "https://caefe.com.br/site/wp-content/uploads/2021/07/logo-caefe-1-branco.png",
       logo: "https://a.imagem.app/bPSwOQ.png",
-      companyName: "Controle de estoque - CAEFE"
-    }
-  })
+      companyName: "Controle de estoque - CAEFE",
+    },
+  });
 
   const sessionStore = new mysqlStore({
     connectionLimit: 10,
@@ -76,10 +86,10 @@ const start = async () => {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    createDatabaseTable: true
-  })
+    createDatabaseTable: true,
+  });
   const secret = process.env.SECRET;
-  const cookieName = 'adminjs';
+  const cookieName = "adminjs";
   const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
     admin,
     {
@@ -92,30 +102,26 @@ const start = async () => {
         return false;
       },
       cookieName: cookieName,
-      cookiePassword: 'secret',      
+      cookiePassword: "secret",
     },
     null,
     {
       store: sessionStore,
       resave: true,
       saveUninitialized: true,
-      secret: 'secret',
+      secret: "secret",
       cookie: {
-        httpOnly: process.env.NODE_ENV === 'production',
-        secure: process.env.NODE_ENV === 'production'
+        httpOnly: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
       },
-      name: cookieName
+      name: cookieName,
     }
-  )
-  app.use(admin.options.rootPath, adminRouter)
+  );
+  app.use(admin.options.rootPath, adminRouter);
 
   app.listen(PORT, () => {
-    console.log(`AdminJS started on http://localhost:${PORT}`)
-  })
+    console.log(`AdminJS started on http://localhost:${PORT}`);
+  });
+};
 
-
-
-
-}
-
-start()
+start();

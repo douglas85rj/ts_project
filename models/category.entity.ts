@@ -8,6 +8,7 @@ interface ICategory {
     status: boolean;
     createdAt: Date;
     updatedAt: Date;
+
 }
 
 export type CategoryCreationAttributes = Optional<ICategory, 'id'>;
@@ -20,6 +21,8 @@ export class Category extends Model<ICategory, CategoryCreationAttributes> imple
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
+
+
 
 Category.init({
     id: {
@@ -53,8 +56,17 @@ Category.init({
         type: DataTypes.DATE,
         allowNull: false,
     }
+
 }, {
     tableName: 'Categorias',
     modelName: 'Category',
     sequelize: sequelize
-});
+}
+
+
+
+);
+
+
+
+
