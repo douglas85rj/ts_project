@@ -55,13 +55,23 @@ StockMovement.init({
     updatedAt: ''
 }, {
     sequelize,
-    tableName: 'stockMovement',
+    tableName: 'EstoqueMovimento',
+    modelName: 'stockMovement',
     createdAt: true,
     updatedAt: true,
 
 });
 
-StockMovement.belongsTo(Product, {foreignKey: 'productId'});
-StockMovement.belongsTo(User, {foreignKey: 'userId'});
+StockMovement.belongsTo(Product, {
+    foreignKey: 'productId',
+    as: 'product'
+});
+
+StockMovement.belongsTo(User, {
+    foreignKey: 'userId',
+    as: 'user'
+});
+
+
 
 
