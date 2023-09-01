@@ -15,7 +15,7 @@ const Category = () => {
     return (
         <Card as= "a" href="#">
             <Text textAlign="center">
-                <H5>Caterias</H5>
+                <H5>Categorias</H5>
                 <Chart chartType="ColumnChart" width="100%" height="400px" data={data} />
             </Text>
         </Card>
