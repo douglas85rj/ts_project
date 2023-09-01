@@ -24,7 +24,7 @@ const data = [
 const Product = () => {
     return (
         <Card>
-            <H5>Product</H5>
+            <H5>Produtos</H5>
             <Chart
       chartType="PieChart"
       data={data}

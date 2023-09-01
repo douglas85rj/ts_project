@@ -4,7 +4,7 @@ import express from "express";
 import session from "express-session";
 import { sequelize } from "./db";
 import * as AdminJSSequelize from "@adminjs/sequelize";
-import { User, StockMovement, Product, Category } from "./models";
+import { User, Category, Product } from "./models";
 import { generateResource } from "./utils/modeling-model";
 import { encryptPassword } from "./utils/user-utils";
 
@@ -63,7 +63,8 @@ const start = async () => {
           },
         }
       ),
-      generateResource(StockMovement),
+
+          
       generateResource(Product),
       generateResource(Category),
     ],
