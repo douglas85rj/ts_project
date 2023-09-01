@@ -9,7 +9,7 @@ interface IProduct {
     id: number;
     name: string;
     description: string;
-    price: number;
+
     quantity: number;
     categoryId: number;
     status: boolean;
@@ -24,7 +24,7 @@ export class Product extends Model<IProduct, ProductCreationAttributes> implemen
     public id!: number;
     public name!: string;
     public description!: string;
-    public price!: number;
+
     public quantity!: number;
     public categoryId!: number;
     public status!: boolean;
@@ -46,11 +46,6 @@ Product.init({
 
     description: {
         type: DataTypes.STRING(128),
-        allowNull: false,
-    },
-
-    price: {
-        type: DataTypes.DECIMAL(10,2),
         allowNull: false,
     },
 
@@ -87,5 +82,5 @@ Product.init({
 });
 
 Product.belongsTo(Category, {foreignKey: 'categoryId', as: 'category'});
-Category.hasMany(Product, {foreignKey: 'categoryId', as: 'products'});
+
 

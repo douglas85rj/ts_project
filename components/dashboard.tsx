@@ -7,6 +7,7 @@ import Category from "./Cards/Category";
 
 const api = new ApiClient();
 
+//OS GRÁFICOS SERÃO IMPLEMENTADOS EM OUTRA VERSÃO, POR ENQUANTO ESTÃO COM INFORMAÇÕES ESTÁTICAS.
 
 const Dashboard = () => {
   const { translateMessage } = useTranslation();
